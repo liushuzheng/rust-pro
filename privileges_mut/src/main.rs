@@ -23,7 +23,19 @@ fn error_borrow_twice() {
     println!("the change sting is {}", s);
 }
 
+fn dangle() -> &String { //  dangle会返回一个指向String的引用
+    let s = String::from("hello"); // s被绑定到新的String上
+    &s  // 我们将指向s的引用返回给调用者
+    // 变量s在这里离开作用域并随之被销毁，它指向的内存自然也不再有效。
+}
+
+// 悬垂引用
+fn overhang_reference() {
+    let reference_to_nothing = dangle();
+}
+
 fn main() {
     // borrow_mut();
-    error_borrow_twice();
+    // error_borrow_twice();
+    overhang_reference();
 }
