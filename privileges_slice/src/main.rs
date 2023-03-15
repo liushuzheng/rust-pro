@@ -29,7 +29,7 @@ fn first_word_p(s: &String) -> &str {
 fn t_first_p() {
     let mut s = String::from("hello world");
     let word = first_word_p(&s);
-    s.clear(); // 错误
+    // s.clear(); // 错误
     println!("the first word is : {}", word);
 }
 
