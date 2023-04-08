@@ -75,3 +75,7 @@ fn start() {
     drop(c);
     println!("CustomSmartPointer dropped before the end of main.");
 }
+
+
+
+
