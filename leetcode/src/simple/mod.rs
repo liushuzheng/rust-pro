@@ -14,15 +14,19 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
     }
 
     for x in nums.iter().enumerate() {
-        if x.1 > &target {
-            continue;
-        }
+        // if x.1 > &target {
+        //     continue;
+        // }
         let n = &target - x.1;
+
         match map.get(&n) {
             None => {
                 continue;
             }
             Some(index) => {
+                if x.0 as i32 == *index as i32 {
+                    continue;
+                }
                 return vec![x.0 as i32, *index as i32];
             }
         }
@@ -33,7 +37,7 @@ pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
 
 #[test]
 fn test1() {
-    let index = two_sum(vec![3,2,4], 6);
+    let index = two_sum(vec![-1,-2,-3,-4,-5], -8);
     for x in index {
         println!("index is {}", x);
     }
