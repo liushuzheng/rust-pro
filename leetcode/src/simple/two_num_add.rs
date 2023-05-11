@@ -24,10 +24,41 @@ impl ListNode {
     }
 }
 
+pub fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
+
+        add_two_numbers_up(l1, l2, 0)
+
+}
+
 // 输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
 // 输出：[8,9,9,9,0,0,0,1]
-pub fn add_two_numbers(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-    Some(Box::new(ListNode::new(26, None)))
+
+pub fn add_two_numbers_up(l1: Option<Box<ListNode>>, l2: Option<Box<ListNode>>, mut up: i32) -> Option<Box<ListNode>> {
+    let mut flag = false;
+    let mut v1: Option<Box<ListNode>> = None;
+    let mut v2: Option<Box<ListNode>> = None;
+    if let Some(v) = l1 {
+        up += v.val;
+        v1 = v.next;
+        flag = true;
+    }
+
+    if let Some(v) = l2 {
+        up += v.val;
+        v2 = v.next;
+        flag = true;
+    }
+    let num = up % 10;
+    let up = up / 10;
+
+    if !flag && up == 0 {
+        return None;
+    }
+    if flag && up > 0 {
+        return Some(Box::new(ListNode::new(num, Some(Box::new(ListNode::new(up, None))))));
+    }
+
+    Some(Box::new(ListNode::new(num, add_two_numbers_up(v1, v2, up))))
 }
 
 
@@ -45,3 +76,4 @@ fn test_f() {
         println!("Matched {:?}!", i);
     }
 }
+
